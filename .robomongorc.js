@@ -32,7 +32,7 @@ function toCSV (deliminator, textQualifier)
     var line = '';
 
     for (var index in headers) {
-        line += textQualifier + headers[index] + textQualifier + deliminator;
+        line += headers[index] + deliminator;
     }
 
     line = line.slice(0, -1);
@@ -45,7 +45,11 @@ function toCSV (deliminator, textQualifier)
         for (var j = 0; j < headers.length; j++) {
             cell = data[i + '_' + headers[j]];
             if (cell == undefined) cell = '';
-            line += textQualifier + cell + textQualifier + deliminator;
+            if (typeof cell == "number"){
+                line += cell + deliminator;
+            } else {
+                line += textQualifier + cell + textQualifier + deliminator;
+            }
         }
 
         line = line.slice(0, -1);
